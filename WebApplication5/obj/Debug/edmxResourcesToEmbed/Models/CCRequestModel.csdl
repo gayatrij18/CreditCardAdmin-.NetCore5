@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UserReg1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_CreditCardRequests">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="RequestedCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_WebsiteUsers" Relationship="Self.FK_tbl_CreditCardRequests_tbl_WebsiteUsers" FromRole="tbl_CreditCardRequests" ToRole="tbl_WebsiteUsers" />
+  </EntityType>
+  <EntityType Name="tbl_WebsiteUsers">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_CreditCardRequests" Relationship="Self.FK_tbl_CreditCardRequests_tbl_WebsiteUsers" FromRole="tbl_WebsiteUsers" ToRole="tbl_CreditCardRequests" />
+  </EntityType>
+  <Association Name="FK_tbl_CreditCardRequests_tbl_WebsiteUsers">
+    <End Role="tbl_WebsiteUsers" Type="Self.tbl_WebsiteUsers" Multiplicity="1" />
+    <End Role="tbl_CreditCardRequests" Type="Self.tbl_CreditCardRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_WebsiteUsers">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tbl_CreditCardRequests">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UserReg1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_CreditCardRequests" EntityType="Self.tbl_CreditCardRequests" />
+    <EntitySet Name="tbl_WebsiteUsers" EntityType="Self.tbl_WebsiteUsers" />
+    <AssociationSet Name="FK_tbl_CreditCardRequests_tbl_WebsiteUsers" Association="Self.FK_tbl_CreditCardRequests_tbl_WebsiteUsers">
+      <End Role="tbl_WebsiteUsers" EntitySet="tbl_WebsiteUsers" />
+      <End Role="tbl_CreditCardRequests" EntitySet="tbl_CreditCardRequests" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

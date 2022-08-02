@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UserReg1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_CreditCardRequests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RequestedCardType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_WebsiteUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_CreditCardRequests_tbl_WebsiteUsers">
+          <End Role="tbl_WebsiteUsers" Type="Self.tbl_WebsiteUsers" Multiplicity="1" />
+          <End Role="tbl_CreditCardRequests" Type="Self.tbl_CreditCardRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_WebsiteUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tbl_CreditCardRequests">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserReg1ModelStoreContainer">
+          <EntitySet Name="tbl_CreditCardRequests" EntityType="Self.tbl_CreditCardRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_WebsiteUsers" EntityType="Self.tbl_WebsiteUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_CreditCardRequests_tbl_WebsiteUsers" Association="Self.FK_tbl_CreditCardRequests_tbl_WebsiteUsers">
+            <End Role="tbl_WebsiteUsers" EntitySet="tbl_WebsiteUsers" />
+            <End Role="tbl_CreditCardRequests" EntitySet="tbl_CreditCardRequests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserReg1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_CreditCardRequests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RequestedCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_WebsiteUsers" Relationship="Self.FK_tbl_CreditCardRequests_tbl_WebsiteUsers" FromRole="tbl_CreditCardRequests" ToRole="tbl_WebsiteUsers" />
+        </EntityType>
+        <EntityType Name="tbl_WebsiteUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_CreditCardRequests" Relationship="Self.FK_tbl_CreditCardRequests_tbl_WebsiteUsers" FromRole="tbl_WebsiteUsers" ToRole="tbl_CreditCardRequests" />
+        </EntityType>
+        <Association Name="FK_tbl_CreditCardRequests_tbl_WebsiteUsers">
+          <End Role="tbl_WebsiteUsers" Type="Self.tbl_WebsiteUsers" Multiplicity="1" />
+          <End Role="tbl_CreditCardRequests" Type="Self.tbl_CreditCardRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_WebsiteUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tbl_CreditCardRequests">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserReg1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_CreditCardRequests" EntityType="Self.tbl_CreditCardRequests" />
+          <EntitySet Name="tbl_WebsiteUsers" EntityType="Self.tbl_WebsiteUsers" />
+          <AssociationSet Name="FK_tbl_CreditCardRequests_tbl_WebsiteUsers" Association="Self.FK_tbl_CreditCardRequests_tbl_WebsiteUsers">
+            <End Role="tbl_WebsiteUsers" EntitySet="tbl_WebsiteUsers" />
+            <End Role="tbl_CreditCardRequests" EntitySet="tbl_CreditCardRequests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserReg1ModelStoreContainer" CdmEntityContainer="UserReg1Entities">
+          <EntitySetMapping Name="tbl_CreditCardRequests">
+            <EntityTypeMapping TypeName="UserReg1Model.tbl_CreditCardRequests">
+              <MappingFragment StoreEntitySet="tbl_CreditCardRequests">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RequestedCardType" ColumnName="RequestedCardType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_WebsiteUsers">
+            <EntityTypeMapping TypeName="UserReg1Model.tbl_WebsiteUsers">
+              <MappingFragment StoreEntitySet="tbl_WebsiteUsers">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

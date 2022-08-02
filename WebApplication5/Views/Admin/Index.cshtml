@@ -1,0 +1,105 @@
+﻿@model IEnumerable<WebApplication5.Models.RequestInfo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Credit Card Requests</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table id="customers" class="table table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("First Name")
+                @*@Html.DisplayNameFor(model => model.FirstName)*@
+            </th>
+            <th>
+                @Html.Label("Last Name")
+                @*@Html.DisplayNameFor(model => model.LastName)*@
+            </th>
+            <th>
+                @Html.Label("Gender")
+                @*@Html.DisplayNameFor(model => model.Gender)*@
+            </th>
+            <th>
+                @Html.Label("Contact")
+                @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+            </th>
+            <th>
+                @Html.Label("Email")
+                @*@Html.DisplayNameFor(model => model.Email)*@
+            </th>
+            <th>
+                @Html.Label("Requested Card Type")
+            </th>
+            <th>
+                @Html.Label("Actions")
+            </th>
+            <th></th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customers.FirstName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.customers.LastName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.customers.Gender)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.customers.PhoneNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.customers.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.requestors.RequestedCardType)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.customers.UserId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.customers.UserId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.customers.UserId })
+                    @Html.ActionLink("Approve", "Approve", new { id = item.customers.UserId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Reject", "Reject request", new { id = item.customers.UserId }, new { @class = "btn btn-danger" })
+                </td>
+                <td></td>
+            </tr>
+        }
+        </tbody>
+    
+
+</table>
+
+
+
+
+@section Scripts
+{
+    
+    <script>
+        $(document).ready(function () {
+
+            $('#customers').DataTable();
+
+        });
+    </script>
+
+}
